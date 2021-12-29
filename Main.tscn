@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://DejaVuSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Level.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+levels = [ NodePath("Level1"), NodePath("Level2"), NodePath("Level3") ]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="HUD"]
+margin_left = 180.0
+margin_top = 280.0
+margin_right = 540.0
+margin_bottom = 360.0
+custom_fonts/font = SubResource( 1 )
+text = "Collection Game"
+align = 1
+valign = 1
+
+[node name="Play" type="Button" parent="HUD"]
+margin_left = 270.0
+margin_top = 520.0
+margin_right = 450.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+
+[node name="Levels" type="Button" parent="HUD"]
+margin_left = 270.0
+margin_top = 680.0
+margin_right = 450.0
+margin_bottom = 760.0
+custom_fonts/font = SubResource( 2 )
+text = "Levels"
+
+[node name="Level1" parent="." instance=ExtResource( 3 )]
+containers = [ 0, 1, 2 ]
+items_in = [ "N", "I", "C", "L", "O", "E", "L", "C", "O", "T" ]
+items_out = [ "N", "O", "I", "T", "C", "E", "L", "L", "O", "C" ]
+
+[node name="Level2" parent="." instance=ExtResource( 3 )]
+containers = [ 0, 1, 2 ]
+items_in = [ "X", " ", "X", "I", "S", "Q", "T", "U", "L", " ", "O", "A", " ", "E", " " ]
+items_out = [ "X", " ", "O", "T", " ", "L", "A", "U", "Q", "E", " ", "S", "I", " ", "X" ]
+
+[node name="Level3" parent="." instance=ExtResource( 3 )]
+containers = [ 0, 3, 2 ]
+items_in = [ "4", "+", "6", "1", "*", "3", "-", "1", "=", "+", "7", "2" ]
+items_out = [ "6", "1", "=", "7", "+", "1", "-", "2", "*", "3", "+", "4" ]
+[connection signal="pressed" from="HUD/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="HUD/Levels" to="." method="_on_Levels_pressed"]
